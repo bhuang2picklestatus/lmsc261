@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<body>
+    <canvas width="600" height="600" id="canvas" style="width: 600px; height: 600px;"></canvas>
+</body>
+
+<script>
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+
+var fishX = -400;
+
+function drawBackground() {
+
+// sky
+ctx.fillStyle = "lightblue";
+ctx.fillRect(0, 0, 600, 120);
+
+// ocean
+ctx.fillStyle = "steelblue";
+ctx.fillRect(0, 120, 600, 360);
+
+ctx.strokeStyle = "white";
+ctx.lineWidth = 3;
+ctx.beginPath();
+ctx.moveTo(0, 120);
+ctx.lineTo(600, 120);
+ctx.stroke();
+
+// sand
+ctx.fillStyle = "tan";
+ctx.fillRect(0, 480, 600, 120);
+
+}
+
+function drawFish() {
+
+ctx.save();
+ctx.translate(fishX, 0);
+
+// fish body
+ctx.fillStyle = "lightseagreen";
+ctx.beginPath();
+ctx.ellipse(300, 300, 90, 80, 0, 0, 2 * Math.PI);
+ctx.fill();
+
+// fish tail
+ctx.beginPath();
+ctx.moveTo(240, 300);
+ctx.lineTo(175, 265);
+ctx.lineTo(185, 335);
+ctx.closePath();
+ctx.fill();
+
+// fish fin
+ctx.beginPath();
+ctx.moveTo(275, 235);
+ctx.lineTo(275, 190);
+ctx.lineTo(340, 245);
+ctx.closePath();
+ctx.fill();
+
+// fish eyes
+ctx.fillStyle = "black";
+ctx.beginPath();
+ctx.arc(320, 280, 8, 0, 2 * Math.PI);
+ctx.fill();
+
+ctx.beginPath();
+ctx.arc(389, 280, 7, -Math.PI / 1.5, Math.PI / 2);
+ctx.fill();
+
+// gills
+ctx.strokeStyle = "teal";
+ctx.lineWidth = 4;
+
+ctx.beginPath();
+ctx.arc(260, 300, 25, 2, 4);
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(280, 300, 25, 2, 4);
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(300, 300, 25, 2, 4);
+ctx.stroke();
+
+// mouth
+ctx.strokeStyle = "black";
+ctx.lineWidth = 3;
+
+ctx.beginPath();
+ctx.arc(367, 310, 10, -Math.PI / 2, Math.PI / 1.5);
+ctx.stroke();
+
+ctx.beginPath();
+ctx.arc(367, 290, 10, -Math.PI / 1.5, Math.PI / 2);
+ctx.stroke();
+
+ctx.restore();
+
+}
+
+function drawCrab() {
+
+//crab body
+ctx.fillStyle = "coral";
+ctx.beginPath();
+ctx.ellipse(470, 520, 30, 22, 0, 0, 2 * Math.PI);
+ctx.fill();
+
+//crab eyes
+ctx.fillStyle = "black";
+ctx.beginPath();
+ctx.ellipse(455, 510, 2, 2, 0, 0, 2 * Math.PI);
+ctx.fill();
+
+ctx.beginPath();
+ctx.ellipse(485, 510, 2, 2, 0, 0, 2 * Math.PI);
+ctx.fill();
+
+//crab mouth
+ctx.strokeStyle = "black"
+ctx.lineWidth = 2;
+
+ctx.beginPath();
+ctx.moveTo(460, 517);
+ctx.lineTo(480, 517);
+ctx.stroke();
+
+//crab legs
+ctx.strokeStyle = "coral"
+ctx.lineWidth = 3;
+ctx.lineCap = "round"
+ctx.beginPath();
+ctx.moveTo(453, 530);
+ctx.lineTo(448, 550);
+ctx.stroke();
+
+ctx.beginPath();
+ctx.moveTo(462, 530);
+ctx.lineTo(457, 550);
+ctx.stroke();
+
+ctx.beginPath();
+ctx.moveTo(478, 530);
+ctx.lineTo(483, 550);
+ctx.stroke();
+
+ctx.beginPath();
+ctx.moveTo(487, 530);
+ctx.lineTo(492, 550);
+ctx.stroke();
+
+//crab claws
+ctx.fillStyle = "coral";
+ctx.beginPath();
+ctx.arc(445, 500, 10, 1, 3.8);
+ctx.fill();
+
+ctx.beginPath();
+ctx.arc(443, 500, 10, 4.6, 1);
+ctx.fill();
+
+ctx.beginPath();
+ctx.arc(495, 500, 10, 2.3, 5);
+ctx.fill();
+
+ctx.beginPath();
+ctx.arc(495, 500, 10, 5.5, 2);
+ctx.fill();
+
+}
+
+function animate() {
+
+drawBackground();
+drawFish();
+drawCrab();
+
+fishX = fishX + 2;
+
+if (fishX > 425) {
+    fishX = -400;
+}
+
+requestAnimationFrame(animate);
+
+}
+
+animate();
+
+</script>
+</html>
